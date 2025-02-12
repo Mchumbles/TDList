@@ -1,46 +1,100 @@
-#root {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
+body {
+  font-family: Arial, sans-serif;
+  background: #f5f5f5;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  margin: 0;
+}
+
+.container {
   text-align: center;
+  background: #fff;
+  padding: 22px;
+  border-radius: 12px;
+  box-shadow: 0px 3px 7px rgba(0, 0, 0, 0.2);
+  width: 90%;
+  max-width: 360px;
+  margin: 0 auto;
 }
 
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
-}
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-.logo.react:hover {
-  filter: drop-shadow(0 0 2em #61dafbaa);
+h2 {
+  color: #333;
+  margin-bottom: 12px;
 }
 
-@keyframes logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+input[type="text"] {
+  width: 95%;
+  padding: 10px;
+  margin: 8px 0 12px;
+  border: 1px solid #bbb;
+  border-radius: 6px;
+  font-size: 16px;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  a:nth-of-type(2) .logo {
-    animation: logo-spin infinite 20s linear;
-  }
+button {
+  padding: 9px 14px;
+  margin: 4px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 15px;
+  transition: background 0.2s ease-in-out;
 }
 
-.card {
-  padding: 2em;
+button.saveItemBtn {
+  background: #2aaa4a;
+  color: white;
 }
 
-.read-the-docs {
-  color: #888;
+button.saveItemBtn:hover {
+  background: #25923f;
+}
+
+button.upItemBtn,
+button.downItemBtn {
+  background: #0080ff;
+  color: white;
+}
+
+button.upItemBtn:hover,
+button.downItemBtn:hover {
+  background: #005bb5;
+}
+
+button.deleteItemBtn {
+  background: #d9303e;
+  color: white;
+}
+
+button.deleteItemBtn:hover {
+  background: #b7212f;
+}
+
+ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.list-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: #fefefe;
+  padding: 12px;
+  border-radius: 6px;
+  margin-top: 7px;
+  box-shadow: 0px 2px 4px rgba(31, 53, 216, 0.4);
+  border: 1px solid rgba(31, 216, 93, 0.3);
 }
 
 li {
-  list-style-type: none;
+  flex-grow: 1;
+  text-align: left;
+  font-size: 16px;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
 }

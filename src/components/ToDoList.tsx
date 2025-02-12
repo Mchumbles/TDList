@@ -10,8 +10,15 @@ function ToDoList() {
   }, []);
 
   function loadItems() {
-    const items = JSON.parse(localStorage.getItem("items") || "[]");
-    setCurrentList(items);
+    const storedItems = JSON.parse(localStorage.getItem("items") || "[]");
+
+    if (storedItems.length === 0) {
+      const defaultTasks = ["Example task", "Read a book", "Exercise"];
+      localStorage.setItem("items", JSON.stringify(defaultTasks));
+      setCurrentList(defaultTasks);
+    } else {
+      setCurrentList(storedItems);
+    }
   }
 
   function handleDeleteItem(indexInFilteredList: number) {
