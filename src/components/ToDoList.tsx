@@ -3,6 +3,7 @@ import ItemAdder from "./ItemAdder";
 
 function ToDoList() {
   const [currentList, setCurrentList] = useState<string[]>([]);
+  const [searchQuery, setSearchQuery] = useState<string>("");
 
   useEffect(() => {
     loadItems();
@@ -13,10 +14,15 @@ function ToDoList() {
     setCurrentList(items);
   }
 
-  function handleDeleteItem(index: number) {
-    const updatedList = currentList.filter((_, i) => i !== index);
-    localStorage.setItem("items", JSON.stringify(updatedList));
-    setCurrentList(updatedList);
+  function handleDeleteItem(indexInFilteredList: number) {
+    const itemToDelete = filteredList[indexInFilteredList];
+    const actualIndex = currentList.indexOf(itemToDelete);
+
+    if (actualIndex !== -1) {
+      const updatedList = currentList.filter((_, i) => i !== actualIndex);
+      localStorage.setItem("items", JSON.stringify(updatedList));
+      setCurrentList(updatedList);
+    }
   }
 
   function handleMoveUp(index: number) {
@@ -26,6 +32,7 @@ function ToDoList() {
         updatedList[index - 1],
         updatedList[index],
       ];
+      localStorage.setItem("items", JSON.stringify(updatedList));
       setCurrentList(updatedList);
     }
   }
@@ -37,16 +44,29 @@ function ToDoList() {
         updatedList[index + 1],
         updatedList[index],
       ];
+      localStorage.setItem("items", JSON.stringify(updatedList));
       setCurrentList(updatedList);
     }
   }
+
+  const filteredList = currentList.filter((item) =>
+    item.toLowerCase().includes(searchQuery.toLowerCase())
+  );
 
   return (
     <div>
       <h2>To-Do List</h2>
       <ItemAdder onItemAdded={loadItems} />
+
+      <input
+        type="text"
+        placeholder="Search items..."
+        value={searchQuery}
+        onChange={(e) => setSearchQuery(e.target.value)}
+      />
+
       <ul>
-        {currentList.map((item, index) => (
+        {filteredList.map((item, index) => (
           <div key={index}>
             <li>{item}</li>
             <button className="upItemBtn" onClick={() => handleMoveUp(index)}>
