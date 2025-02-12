@@ -54,7 +54,7 @@ function ToDoList() {
   );
 
   return (
-    <div>
+    <div className="container">
       <h2>To-Do List</h2>
       <ItemAdder onItemAdded={loadItems} />
 
@@ -67,7 +67,7 @@ function ToDoList() {
 
       <ul>
         {filteredList.map((item, index) => (
-          <div key={index}>
+          <div key={index} className="list-item">
             <li>{item}</li>
             <button className="upItemBtn" onClick={() => handleMoveUp(index)}>
               👆
