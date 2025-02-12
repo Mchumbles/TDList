@@ -8,15 +8,37 @@ function ToDoList() {
     loadItems();
   }, []);
 
-  const loadItems = () => {
+  function loadItems() {
     const items = JSON.parse(localStorage.getItem("items") || "[]");
     setCurrentList(items);
-  };
+  }
 
   function handleDeleteItem(index: number) {
     const updatedList = currentList.filter((_, i) => i !== index);
     localStorage.setItem("items", JSON.stringify(updatedList));
     setCurrentList(updatedList);
+  }
+
+  function handleMoveUp(index: number) {
+    if (index > 0) {
+      const updatedList = [...currentList];
+      [updatedList[index], updatedList[index - 1]] = [
+        updatedList[index - 1],
+        updatedList[index],
+      ];
+      setCurrentList(updatedList);
+    }
+  }
+
+  function handleMoveDown(index: number) {
+    if (index < currentList.length - 1) {
+      const updatedList = [...currentList];
+      [updatedList[index], updatedList[index + 1]] = [
+        updatedList[index + 1],
+        updatedList[index],
+      ];
+      setCurrentList(updatedList);
+    }
   }
 
   return (
@@ -25,13 +47,22 @@ function ToDoList() {
       <ItemAdder onItemAdded={loadItems} />
       <ul>
         {currentList.map((item, index) => (
-          <div>
-            <li key={index}>{item}</li>
+          <div key={index}>
+            <li>{item}</li>
+            <button className="upItemBtn" onClick={() => handleMoveUp(index)}>
+              👆
+            </button>
+            <button
+              className="downItemBtn"
+              onClick={() => handleMoveDown(index)}
+            >
+              👇
+            </button>
             <button
               className="deleteItemBtn"
               onClick={() => handleDeleteItem(index)}
             >
-              x
+              🗑️
             </button>
           </div>
         ))}

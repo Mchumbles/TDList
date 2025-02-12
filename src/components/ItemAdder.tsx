@@ -13,9 +13,7 @@ function ItemAdder({ onItemAdded }: { onItemAdded: () => void }) {
     const updatedItems = [...existingItems, item].reverse();
 
     localStorage.setItem("items", JSON.stringify(updatedItems));
-
     onItemAdded();
-
     setItem("");
   };
 
