@@ -47,7 +47,7 @@ ul {
 
 .task-buttons {
   display: flex;
-  gap: 5px;
+  gap: 28px;
   position: absolute;
   bottom: 5px;
   right: 8px;
@@ -78,4 +78,19 @@ ul {
 
 .deleteItemBtn:hover {
   background: #e11d31;
+}
+
+.completed {
+  background: #d4edda; /* Light green */
+  border-color: #a3cfbb;
+  transition: background 0.3s ease-in-out;
+}
+
+.completeItemBtn {
+  background: #1c7633;
+  color: white;
+}
+
+.completeItemBtn:hover {
+  background: #24a943;
 }

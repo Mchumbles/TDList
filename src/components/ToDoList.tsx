@@ -1,10 +1,11 @@
 import { useEffect, useState } from "react";
 import ItemAdder from "./ItemAdder";
-import "../styles/toDoList.css"
+import "../styles/toDoList.css";
 
 interface item {
   title: string;
   description: string;
+  completed: boolean;
 }
 
 function ToDoList() {
@@ -34,9 +35,9 @@ function ToDoList() {
 
       if (storedItems.length === 0) {
         const defaultTasks = [
-          { title: "Example task", description: "" },
-          { title: "Read a book", description: "" },
-          { title: "Exercise", description: "" },
+          { title: "Example task", description: "", completed: false },
+          { title: "Read a book", description: "", completed: false },
+          { title: "Exercise", description: "", completed: false },
         ];
         localStorage.setItem("items", JSON.stringify(defaultTasks));
         setCurrentList(defaultTasks);
@@ -85,6 +86,13 @@ function ToDoList() {
     }
   }
 
+  function toggleComplete(index: number) {
+    const updatedList = [...currentList];
+    updatedList[index].completed = !updatedList[index].completed;
+    localStorage.setItem("items", JSON.stringify(updatedList));
+    setCurrentList(updatedList);
+  }
+
   return (
     <div className="container">
       <h2>To-Do List</h2>
@@ -99,9 +107,18 @@ function ToDoList() {
 
       <ul>
         {filteredList.map((item, index) => (
-          <div key={index} className="list-item">
+          <div
+            key={index}
+            className={`list-item ${item.completed ? "completed" : ""}`}
+          >
             <div className="task-title">{item.title}</div>
             <div className="task-buttons">
+              <button
+                className="completeItemBtn"
+                onClick={() => toggleComplete(index)}
+              >
+                ✅
+              </button>
               <button className="upItemBtn" onClick={() => handleMoveUp(index)}>
                 👆
               </button>
