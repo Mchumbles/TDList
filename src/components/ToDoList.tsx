@@ -10,23 +10,42 @@ function ToDoList() {
   const [currentList, setCurrentList] = useState<item[]>([]);
   const [searchQuery, setSearchQuery] = useState<string>("");
 
+  const filteredList = currentList.filter(
+    (item) =>
+      item?.title &&
+      item.title.toLowerCase().includes(searchQuery.toLowerCase())
+  );
+
   useEffect(() => {
     loadItems();
   }, []);
 
   function loadItems() {
-    const storedItems = JSON.parse(localStorage.getItem("items") || "[]");
+    try {
+      const storedItems = JSON.parse(localStorage.getItem("items") || "[]");
 
-    if (storedItems.length === 0) {
-      const defaultTasks = [
-        { title: "Example task", description: "" },
-        { title: "Read a book", description: "" },
-        { title: "Exercise", description: "" },
-      ];
-      localStorage.setItem("items", JSON.stringify(defaultTasks));
-      setCurrentList(defaultTasks);
-    } else {
-      setCurrentList(storedItems);
+      if (
+        !Array.isArray(storedItems) ||
+        storedItems.some((item) => !item || typeof item.title !== "string")
+      ) {
+        throw new Error("Invalid data in localStorage");
+      }
+
+      if (storedItems.length === 0) {
+        const defaultTasks = [
+          { title: "Example task", description: "" },
+          { title: "Read a book", description: "" },
+          { title: "Exercise", description: "" },
+        ];
+        localStorage.setItem("items", JSON.stringify(defaultTasks));
+        setCurrentList(defaultTasks);
+      } else {
+        setCurrentList(storedItems);
+      }
+    } catch (error) {
+      console.error("Failed to load items:", error);
+      localStorage.removeItem("items");
+      setCurrentList([]);
     }
   }
 
@@ -64,10 +83,6 @@ function ToDoList() {
       setCurrentList(updatedList);
     }
   }
-
-  const filteredList = currentList.filter((item) =>
-    item.title.toLowerCase().includes(searchQuery.toLowerCase())
-  );
 
   return (
     <div className="container">

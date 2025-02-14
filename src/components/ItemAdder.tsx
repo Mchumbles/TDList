@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-interface item {
+interface Item {
   title: string;
   description: string;
 }
@@ -11,16 +11,21 @@ function ItemAdder({ onItemAdded }: { onItemAdded: () => void }) {
   const handleAddItem = () => {
     if (!item.trim()) return;
 
-    const existingItems: item[] = JSON.parse(
-      localStorage.getItem("items") || "[]"
-    );
+    try {
+      const existingItems: Item[] = JSON.parse(
+        localStorage.getItem("items") || "[]"
+      );
 
-    const newTask = { title: item, description: "" };
-    const updatedItems = [newTask, ...existingItems];
+      const newTask: Item = { title: item, description: "" };
+      const updatedItems = [newTask, ...existingItems];
 
-    localStorage.setItem("items", JSON.stringify(updatedItems));
-    onItemAdded();
-    setItem("");
+      localStorage.setItem("items", JSON.stringify(updatedItems));
+      onItemAdded();
+      setItem("");
+    } catch (error) {
+      console.error("Failed to add item:", error);
+      localStorage.setItem("items", JSON.stringify([]));
+    }
   };
 
   return (
