@@ -4,9 +4,10 @@ A simple React-based to-do list that allows users to add, delete, search, and re
 
 ## 🚀 Features
 
-- ✅ Add new tasks
+- 📝 Add new tasks
 - 🔍 Search for tasks
 - ⬆ Move tasks up or ⬇ move them down
+- ✅ Check tasks off as completed
 - 🗑 Delete tasks
 - 💾 Stores tasks in `localStorage`
 
