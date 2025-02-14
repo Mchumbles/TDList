@@ -1,0 +1,17 @@
+.github-button {
+  position: absolute;
+  top: 2rem;
+  right: 1.5rem;
+  background: none;
+  border: none;
+  padding: 0;
+}
+
+.github-link {
+  color: black;
+  transition: color 0.3s ease;
+}
+
+.github-link:hover {
+  color: gray;
+}

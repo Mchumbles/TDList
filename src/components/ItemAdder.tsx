@@ -1,4 +1,5 @@
 import { useState } from "react";
+import "../styles/itemAdder.css";
 
 interface Item {
   title: string;

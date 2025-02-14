@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import ItemAdder from "./ItemAdder";
+import "../styles/toDoList.css"
 
 interface item {
   title: string;
