@@ -1,8 +1,13 @@
 import { useEffect, useState } from "react";
 import ItemAdder from "./ItemAdder";
 
+interface item {
+  title: string;
+  description: string;
+}
+
 function ToDoList() {
-  const [currentList, setCurrentList] = useState<string[]>([]);
+  const [currentList, setCurrentList] = useState<item[]>([]);
   const [searchQuery, setSearchQuery] = useState<string>("");
 
   useEffect(() => {
@@ -13,7 +18,11 @@ function ToDoList() {
     const storedItems = JSON.parse(localStorage.getItem("items") || "[]");
 
     if (storedItems.length === 0) {
-      const defaultTasks = ["Example task", "Read a book", "Exercise"];
+      const defaultTasks = [
+        { title: "Example task", description: "" },
+        { title: "Read a book", description: "" },
+        { title: "Exercise", description: "" },
+      ];
       localStorage.setItem("items", JSON.stringify(defaultTasks));
       setCurrentList(defaultTasks);
     } else {
@@ -57,7 +66,7 @@ function ToDoList() {
   }
 
   const filteredList = currentList.filter((item) =>
-    item.toLowerCase().includes(searchQuery.toLowerCase())
+    item.title.toLowerCase().includes(searchQuery.toLowerCase())
   );
 
   return (
@@ -75,7 +84,7 @@ function ToDoList() {
       <ul>
         {filteredList.map((item, index) => (
           <div key={index} className="list-item">
-            <li>{item}</li>
+            <li>{item.title}</li>
             <button className="upItemBtn" onClick={() => handleMoveUp(index)}>
               👆
             </button>

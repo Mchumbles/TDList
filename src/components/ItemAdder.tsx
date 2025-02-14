@@ -6,11 +6,12 @@ function ItemAdder({ onItemAdded }: { onItemAdded: () => void }) {
   const handleAddItem = () => {
     if (!item.trim()) return;
 
-    const existingItems: string[] = JSON.parse(
+    const existingItems: { title: string; description: string }[] = JSON.parse(
       localStorage.getItem("items") || "[]"
     );
 
-    const updatedItems = [...existingItems, item].reverse();
+    const newItem = { title: item, description: "" };
+    const updatedItems = [...existingItems, newItem].reverse();
 
     localStorage.setItem("items", JSON.stringify(updatedItems));
     onItemAdded();
