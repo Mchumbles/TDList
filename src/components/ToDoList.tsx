@@ -84,22 +84,24 @@ function ToDoList() {
       <ul>
         {filteredList.map((item, index) => (
           <div key={index} className="list-item">
-            <li>{item.title}</li>
-            <button className="upItemBtn" onClick={() => handleMoveUp(index)}>
-              👆
-            </button>
-            <button
-              className="downItemBtn"
-              onClick={() => handleMoveDown(index)}
-            >
-              👇
-            </button>
-            <button
-              className="deleteItemBtn"
-              onClick={() => handleDeleteItem(index)}
-            >
-              🗑️
-            </button>
+            <div className="task-title">{item.title}</div>
+            <div className="task-buttons">
+              <button className="upItemBtn" onClick={() => handleMoveUp(index)}>
+                👆
+              </button>
+              <button
+                className="downItemBtn"
+                onClick={() => handleMoveDown(index)}
+              >
+                👇
+              </button>
+              <button
+                className="deleteItemBtn"
+                onClick={() => handleDeleteItem(index)}
+              >
+                🗑️
+              </button>
+            </div>
           </div>
         ))}
       </ul>

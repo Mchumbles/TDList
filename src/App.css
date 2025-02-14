@@ -80,18 +80,6 @@ ul {
   margin: 0;
 }
 
-.list-item {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  background: #fefefe;
-  padding: 12px;
-  border-radius: 6px;
-  margin-top: 7px;
-  box-shadow: 0px 2px 4px rgba(31, 53, 216, 0.4);
-  border: 1px solid rgba(31, 216, 93, 0.3);
-}
-
 li {
   flex-grow: 1;
   text-align: left;
@@ -99,4 +87,54 @@ li {
   overflow: hidden;
   white-space: nowrap;
   text-overflow: ellipsis;
+}
+/* 
+textarea.item {
+  width: 100%;
+  min-height: 40px;
+  max-height: 120px;
+  overflow-y: auto; 
+  word-wrap: break-word;
+  white-space: pre-wrap; 
+  resize: none; 
+} */
+
+.list-item {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: space-between;
+  background: #fefefe;
+  padding: 12px;
+  border-radius: 6px;
+  margin-top: 7px;
+  box-shadow: 0px 2px 4px rgba(31, 53, 216, 0.4);
+  border: 1px solid rgba(31, 216, 93, 0.3);
+  position: relative;
+  min-height: 80px;
+  padding-bottom: 40px;
+}
+
+.task-title {
+  font-size: 16px;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  white-space: normal;
+  text-align: left;
+  width: 100%;
+}
+
+.task-buttons {
+  display: flex;
+  gap: 5px;
+  position: absolute;
+  bottom: 5px;
+  right: 8px;
+  margin-top: 8px;
+}
+
+.task-content {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
 }
